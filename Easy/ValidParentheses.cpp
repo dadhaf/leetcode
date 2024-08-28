@@ -1,69 +1,92 @@
 #include<iostream>
 #include<string>
-
+#include<stack>
 
 using namespace std;
 
 class Solution {
 public:
     bool isValid(string s) {
+
+        stack<char> st;
+        char top, r;
         bool val = true;
         int count = 0;
-        int mask = 0xFF;
         int len = s.length();
         if(len % 2 == 0){
             for(int i=0; i<len;i++)
             {
                 if(s[i] == '{')
                 {
-                    if((mask & (1<<1)) == 0){
-                        val = false;
-                        break;
-                    }
+                    top = '{';
+                    st.push('{');
                     count+=2;
-                    mask = 1<<0 | 1<<1 | 1<<2 | 0<<3 | 1<<4 | 0<<5 ;
                     // next possible 1,2,3,-2
                 } else if (s[i] == '}')
                 {
-                    if((mask & (1<<4)) == 0){
+                    count-=2;
+                    if (count < 0){
                         val = false;
                         break;
                     }
-                    count-=2;
+                    if(top == '{')
+                    {
+                        st.pop();
+                        if(!st.empty())
+                        {
+                            top = st.top();
+                        }
+                    } else {
+                        val = false;
+                    }
+                    
+                    
                     // next possible any
                 } else if (s[i] == '[')
                 {
-                    if((mask & (1<<2)) == 0){
-                        val = false;
-                        break;
-                    }
+                    top = '[';
+                    st.push('[');
+                    
                     
                     count+=3;
-                    mask = 1<<0 | 1<<1 | 1<<2 | 0<<3 | 0<<4 | 1<<5 ;
                     // next possible 1,2,3,-3
                 } else if (s[i] == ']')
                 {
-                    if((mask & (1<<5)) == 0){
+                    count-=3;
+
+                    if (count < 0){
                         val = false;
                         break;
                     }
-                    count-=3;
+                    if(top == '[')
+                    {
+                        st.pop();
+                        if(!st.empty())
+                        {top = st.top();}
+                    } else {
+                        val = false;
+                    }
                 } else if (s[i] == '(')
                 {
-                    if((mask & (1<<0)) == 0){
-                        val = false;
-                        break;
-                    }
+                    top = '(';
+                    st.push('(');
                     count+=1;
-                    mask = 1<<0 | 1<<1 | 1<<2 | 1<<3 | 0<<4 | 0<<5 ;
-                    // next possible 1,2,3,-1
                 } else 
                 {
-                    if((mask & (1<<3)) == 0){
+                    count-=1;
+
+                    if (count < 0){
                         val = false;
                         break;
                     }
-                    count-=1;
+                    if(top == '(')
+                    {
+                        st.pop();
+                        if(!st.empty())
+                        {top = st.top();}
+                    } else {
+                        val = false;
+                    }
                 }
                 if(count < 0)
                 {
@@ -77,6 +100,11 @@ public:
             {
                 val = false;
             } 
+
+            if(!st.empty())
+            {
+                val = false;
+            }
         } else 
         {
             val = false;
@@ -90,6 +118,6 @@ public:
 int main(){
 
     Solution sol;
-    cout << sol.isValid("([])") << endl;
+    cout << sol.isValid("){") << endl;
     return 0;
 }

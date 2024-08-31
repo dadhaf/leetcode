@@ -8,28 +8,29 @@ class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
         int len = nums.size();
-        int k;
-        vector<int> v1;
-        for (int i; i < len;i++)
+        int k= 0, l = 0;
+        for (int i=0; i < len;i++)
         {
-            if(nums[i] != val)
+            
+            if(nums[i-l] != val)
             {
-                v1.insert(v1.begin(), nums[i]);
+                k++;
+            } else 
+            {
+                nums.erase(nums.begin()+i-l);
+                l++;
             }
+            
             
         }
 
-        len = v1.size();
-        nums.insert(nums.begin(), v1.begin(), v1.end());
-        return len;
+        return k;
     }
-
-    
 };
 
 int main()
 {
-    vector<int> v ({3,2,2,3});
+    vector<int> v ({3,2,1,2,3,1,2,3});
     Solution sol;
     int k;
     k = sol.removeElement(v, 3);

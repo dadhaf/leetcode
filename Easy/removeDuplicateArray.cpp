@@ -22,23 +22,23 @@ public:
         int setlen = s.size();
         vector<int> v;
         set<int, greater<int> >::iterator itr;
-        cout << "\nThe set s1 is : \n";
+        // cout << "\nThe set s1 is : \n";
         for (itr = s.begin(); itr != s.end(); itr++) {
-            cout << *itr << " ";
+            // cout << *itr << " ";
             v.insert(v.begin(), *itr);
         }
-        cout << endl;
+        // cout << endl;
 
         sort(v.begin(), v.end());
         
         nums.insert(nums.begin(), v.begin(), v.end());
-        cout << setlen << endl;
-        len = nums.size();
-        for(int i=0;i<len;i++)
-        {
-            cout << nums[i] << " ";
-        }
-        cout << endl;
+        // cout << setlen << endl;
+        // len = nums.size();
+        // for(int i=0;i<len;i++)
+        // {
+        //     cout << nums[i] << " ";
+        // }
+        // cout << endl;
         
 
 
@@ -47,7 +47,7 @@ public:
         // copy (s.begin (), s.end (), back_inserter (v));
         // nums = v;
 
-        return s.size ();
+        return setlen;
     }
 };
 

@@ -5,40 +5,46 @@ using namespace std;
 
 class Solution {
 public:
-    
 
-    int text2dec(string a)
-    {
-        int ret;
+
+    string addBinary(string a, string b) {
+        unsigned long long vala = 0, valb = 0, valc = 0;// = text2dec(a) + text2dec(b);
         int len = a.length();
         for(int i = len-1;i>=0;i--)
         {
             
             if(a[i] == '1')
             {
-                ret += (1<<(len - i - 1));
+                vala += (1<<(len - i - 1));
             }
         }
 
-        return ret;
-    }
-
-    string dec2text(int a)
-    {
-        string s = "";
-        while(a>1)
+        len = b.length();
+        for(int i = len-1;i>=0;i--)
         {
-            if(a%2 == 0)
+            
+            if(b[i] == '1')
+            {
+                valb += (1<<(len - i - 1));
+            }
+        }
+
+        valc = vala + valb;
+
+        string s = "";
+        while(valc>1)
+        {
+            if(valc%2 == 0)
             {
                 s.insert(0,"0");
             } else
             {
                 s.insert(0,"1");
             }
-            a=a/2;
+            valc=valc/2;
         }
 
-        if(a==1)
+        if(valc==1)
         {
             s.insert(0,"1");
         } else
@@ -48,16 +54,6 @@ public:
 
         return s;
         
-        
-    }
-
-    string addBinary(string a, string b) {
-        int val = text2dec(a) + text2dec(b);
-
-        
-
-       return dec2text(val);
-
     }
 };
 
@@ -67,7 +63,7 @@ int main()
 
     Solution sol;
 
-    cout << sol.addBinary("11", "1") << endl;
+    cout << sol.addBinary("10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101", "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011") << endl;
 
     return 0;
 }

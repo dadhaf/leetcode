@@ -48,6 +48,25 @@ public:
 
     } 
 
+
+    void selectionSort(int* nums1, int size)
+    {
+        for (int temp, min, i = 0; i<size;i++)
+        {
+            min = i;
+            for(int j=i+1;j<size;j++)
+            {
+                if(nums1[min] > nums1[j])
+                {
+                    min = j;
+                }
+            }
+            // swap index min and i
+            temp = nums1[i];
+            nums1[i] = nums1[min];
+            nums1[min] = temp;
+        }
+    }
 };
 
 
@@ -67,6 +86,12 @@ int main()
     l = sizeof(b)/sizeof(b[0]);
     sol.insertionSort(b, l);
     for(auto i:b)
+        std::cout << i << std::endl;
+
+    int c[] = {80,100,99,98,97,96,95,94,93,92,91};
+    l =sizeof(c)/sizeof(c[0]);
+    sol.selectionSort(c,l);
+    for(auto i : c)
         std::cout << i << std::endl;
 
 

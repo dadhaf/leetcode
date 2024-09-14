@@ -65,6 +65,58 @@ class Sorting
                 }
             }
         }
+
+        void mergeSort(vector<int> &num)
+        {
+            int length = num.size();
+
+            if(length == 1){return;}
+            // left
+            vector<int> left(num.begin(), num.begin() + length/2 );
+            vector<int> right(num.begin() + length/2, num.end() );
+            mergeSort(left);
+            //right
+            mergeSort(right);
+            // merge
+            merge(left, right, num);
+
+        }
+
+private:
+        void merge(vector<int> left, vector<int> right, vector<int> &num)
+        {
+            int l=0, r=0, s = 0;
+            while(l<left.size() && r < right.size())
+            {
+                if(left[l] > right[r])
+                {
+                    num[s] = right[r];
+                    r++;
+                    s++;
+                } else
+                {
+                    num[s] = left[l];
+                    l++;
+                    s++;
+                }
+            }
+
+            while(l<left.size())
+            {
+                num[s] = left[l];
+                l++;
+                s++;
+            }
+
+            while (r<right.size())
+            {
+                /* code */
+                num[s] = right[r];
+                r++;
+                s++;
+            }
+            
+        }
 };
 
 
@@ -87,6 +139,11 @@ int main()
 
     v = {4,3,2,1};
     sorting.insertionSort(v);
+
+    for(auto i:v)
+        cout << i << endl;
+    v = {4,3,2,1};
+    sorting.mergeSort(v);
 
     for(auto i:v)
         cout << i << endl;

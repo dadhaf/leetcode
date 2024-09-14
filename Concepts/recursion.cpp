@@ -22,6 +22,15 @@ public:
         walkWithReccursion(steps-1);
     }
 
+    unsigned long long factorial(int num)
+    {
+        if(num==1 || num == 0)
+        { return 1;}
+        if(num<0)
+            return num*factorial(num+1);
+        return num*factorial(num-1);
+    }
+
 };
 
 int main()
@@ -30,4 +39,5 @@ int main()
     RecursionExample re;
     re.walk(5);
     re.walkWithReccursion(5);
+    std::cout << re.factorial(66) << std::endl;
 }

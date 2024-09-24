@@ -7,10 +7,10 @@ using namespace std;
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        set<char> s1{s.begin(),s.end()};
-        set<char> s2{t.begin(),t.end()};
+        // set<char> s1{s.begin(),s.end()};
+        // set<char> s2{t.begin(),t.end()};
 
-        if(!(s1 == s2) || s.size() != t.size())
+        if(s.size() != t.size())
         {
             return false;
         }
@@ -26,9 +26,9 @@ public:
             np[i] = np[i]+1;
         }
 
-        for(auto i:s1)
+        for(auto i:mp)
         {
-            if(mp[i] != np[i])
+            if(i.second != np[i.first])
             {
                 return false;
             }
@@ -42,5 +42,5 @@ int main(){
 
     Solution sol;
 
-    cout << sol.isAnagram("a", "ba") << endl;
+    cout << sol.isAnagram("anagram", "nagaram") << endl;
 }

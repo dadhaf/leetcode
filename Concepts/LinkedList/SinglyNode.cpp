@@ -56,8 +56,8 @@ void insertAtPosition(SinglyNode* &node, int data, int position){
     temp->next = new_node;
 }
 
-void updateAtPosition(SinglyNode* node, int val, int pos);
-void updateAtPosition(SinglyNode* node, int val, int pos){
+void updateAtPosition(SinglyNode* &node, int val, int pos);
+void updateAtPosition(SinglyNode* &node, int val, int pos){
     SinglyNode* temp = node;
     int curr_pos = 0;
 
@@ -73,6 +73,35 @@ void updateAtPosition(SinglyNode* node, int val, int pos){
 
     temp->val = val;
 
+}
+
+void deleteAttail(SinglyNode* &node);
+void deleteAttail(SinglyNode* &node){
+    SinglyNode* second_last = node;
+    while(second_last->next->next != NULL){
+        second_last = second_last->next;
+    }
+    SinglyNode* temp = second_last->next;
+    second_last->next = NULL;
+    free(temp);
+}
+
+void deleteAtPosition(SinglyNode* &node, int pos);
+void deleteAtPosition(SinglyNode* &node, int pos){
+    SinglyNode* temp = node;
+    if(pos == 0){
+        node = node->next;
+        free(temp);
+        return;
+    }
+    int curr_pos = 0;
+    while(curr_pos < pos - 1){
+        temp = temp->next;
+        curr_pos++;
+    }
+    SinglyNode* delNode = temp->next;
+    temp->next = temp->next->next;
+    free(delNode);
 }
 
 void display(SinglyNode* node);
@@ -94,6 +123,12 @@ int main(){
     insertAtPosition(node, 12, 1);
     display(node);
     updateAtPosition(node, 7,1);
+    display(node);
+    insertAtLast(node, 99);
+    display(node);
+    deleteAttail(node);
+    display(node);
+    deleteAtPosition(node,0);
     display(node);
     return 0;
 }

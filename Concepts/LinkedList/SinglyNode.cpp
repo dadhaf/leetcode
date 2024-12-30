@@ -56,6 +56,25 @@ void insertAtPosition(SinglyNode* &node, int data, int position){
     temp->next = new_node;
 }
 
+void updateAtPosition(SinglyNode* node, int val, int pos);
+void updateAtPosition(SinglyNode* node, int val, int pos){
+    SinglyNode* temp = node;
+    int curr_pos = 0;
+
+    if(pos==0){
+        node->val = val;
+        return;
+    }
+    
+    while(curr_pos < pos){
+        temp = temp->next;
+        curr_pos++;
+    }
+
+    temp->val = val;
+
+}
+
 void display(SinglyNode* node);
 void display(SinglyNode* node){
     SinglyNode* temp = node; /* Pointer to traverse the linked list in forward direction */
@@ -73,6 +92,8 @@ int main(){
     insertAtLast(node,18);
     display(node);
     insertAtPosition(node, 12, 1);
+    display(node);
+    updateAtPosition(node, 7,1);
     display(node);
     return 0;
 }

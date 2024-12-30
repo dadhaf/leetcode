@@ -1,22 +1,8 @@
-#include<iostream>
-
+#include"SinglyNode.h"
 
 using namespace std;
 
-class SinglyNode
-{
 
-public:
-    int val;
-    SinglyNode* next;
-    SinglyNode(int data){
-        val = data;
-        next = NULL;
-    }
-    
-};
-
-void insertAtHead(SinglyNode* &node, int data);
 void insertAtHead(SinglyNode* &head, int data){
     SinglyNode* node = new SinglyNode(data);
     node->val = data;
@@ -24,7 +10,6 @@ void insertAtHead(SinglyNode* &head, int data){
     head = node;
 }
 
-void insertAtLast(SinglyNode* &node, int data);
 void insertAtLast(SinglyNode* &node, int data){
     SinglyNode* new_node = new SinglyNode(data);
     SinglyNode* temp = node;
@@ -36,7 +21,6 @@ void insertAtLast(SinglyNode* &node, int data){
     
 }
 
-void insertAtPosition(SinglyNode* &node, int data, int position);
 void insertAtPosition(SinglyNode* &node, int data, int position){
     SinglyNode* new_node = new SinglyNode(data);
     SinglyNode* temp = node;
@@ -56,7 +40,6 @@ void insertAtPosition(SinglyNode* &node, int data, int position){
     temp->next = new_node;
 }
 
-void updateAtPosition(SinglyNode* &node, int val, int pos);
 void updateAtPosition(SinglyNode* &node, int val, int pos){
     SinglyNode* temp = node;
     int curr_pos = 0;
@@ -75,7 +58,6 @@ void updateAtPosition(SinglyNode* &node, int val, int pos){
 
 }
 
-void deleteAttail(SinglyNode* &node);
 void deleteAttail(SinglyNode* &node){
     SinglyNode* second_last = node;
     while(second_last->next->next != NULL){
@@ -86,7 +68,6 @@ void deleteAttail(SinglyNode* &node){
     free(temp);
 }
 
-void deleteAtPosition(SinglyNode* &node, int pos);
 void deleteAtPosition(SinglyNode* &node, int pos){
     SinglyNode* temp = node;
     if(pos == 0){
@@ -104,7 +85,22 @@ void deleteAtPosition(SinglyNode* &node, int pos){
     free(delNode);
 }
 
-void display(SinglyNode* node);
+void deleteSecondNode(SinglyNode* &node){
+    int pos = 1;
+    SinglyNode* temp = node;
+    if(temp->next == NULL){
+        return;
+    }
+
+    if(temp->next->next == NULL){
+        deleteAttail(temp);
+        return;
+    }
+    temp = node->next->next;
+    deleteAtPosition(node,1);
+    deleteSecondNode(temp);
+}
+
 void display(SinglyNode* node){
     SinglyNode* temp = node; /* Pointer to traverse the linked list in forward direction */
     while(temp!=NULL){
@@ -126,9 +122,11 @@ int main(){
     display(node);
     insertAtLast(node, 99);
     display(node);
-    deleteAttail(node);
-    display(node);
-    deleteAtPosition(node,0);
+    // deleteAttail(node);
+    // display(node);
+    // deleteAtPosition(node,0);
+    // display(node);
+    deleteSecondNode(node);
     display(node);
     return 0;
 }

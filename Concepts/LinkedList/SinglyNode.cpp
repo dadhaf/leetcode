@@ -13,7 +13,10 @@ void insertAtHead(SinglyNode* &head, int data){
 void insertAtLast(SinglyNode* &node, int data){
     SinglyNode* new_node = new SinglyNode(data);
     SinglyNode* temp = node;
-
+    if(node == NULL){
+        node = new_node;
+        return;
+    }
     while(temp->next != NULL){
         temp = temp->next;
     }
@@ -110,23 +113,48 @@ void display(SinglyNode* node){
     cout << "NULL" << endl;
 }
 
+void deleteDuplicateNode(SinglyNode* &node);
+void deleteDuplicateNode(SinglyNode* &node){
+    SinglyNode* cur_node = node;
+    SinglyNode* temp = NULL;
+    while (cur_node->next != NULL)
+    {
+        while(cur_node->val == cur_node->next->val){
+            temp = cur_node->next;
+            cur_node->next = cur_node->next->next;
+            free(temp);
+            if(cur_node->next == NULL){
+                return;
+            }       
+        }
+        cur_node = cur_node->next;
+    }
+    
+}
+
 int main(){
     SinglyNode* node = NULL;
-    insertAtHead(node, 5);
+    insertAtLast(node, 1);
     display(node);
-    insertAtLast(node,18);
+    
+    insertAtLast(node, 2);
     display(node);
-    insertAtPosition(node, 12, 1);
+    
+    insertAtLast(node, 3);
     display(node);
-    updateAtPosition(node, 7,1);
+    
+    insertAtLast(node, 4);
     display(node);
-    insertAtLast(node, 99);
+    
+    insertAtLast(node, 5);
     display(node);
-    // deleteAttail(node);
-    // display(node);
-    // deleteAtPosition(node,0);
-    // display(node);
-    deleteSecondNode(node);
+    insertAtLast(node, 5);
+    display(node);
+    insertAtLast(node, 6);
+    display(node);
+    insertAtLast(node, 6);
+    display(node);
+    deleteDuplicateNode(node);
     display(node);
     return 0;
 }

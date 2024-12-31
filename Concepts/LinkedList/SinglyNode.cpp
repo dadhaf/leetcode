@@ -115,20 +115,31 @@ void display(SinglyNode* node){
 
 void deleteDuplicateNode(SinglyNode* &node){
     SinglyNode* cur_node = node;
-    SinglyNode* temp = NULL;
-    while (cur_node != NULL && cur_node->next != NULL)
+    // SinglyNode* temp = NULL;
+    while (cur_node != NULL)
     {
-        while(cur_node->val == cur_node->next->val){
-            temp = cur_node->next;
+        while(cur_node->next != NULL && cur_node->val == cur_node->next->val){
+            SinglyNode* temp = cur_node->next;
             cur_node->next = cur_node->next->next;
             free(temp);
-            if(cur_node->next == NULL){
-                return;
-            }       
+            // if(cur_node->next == NULL){
+            //     return;
+            // }       
         }
         cur_node = cur_node->next;
     }
     
+}
+
+void displayReverse(SinglyNode* &node);
+void displayReverse(SinglyNode* &node){
+    if(node==NULL){
+        cout << "\nNULL";
+        return;
+    }
+
+    displayReverse(node->next);
+    cout << "->" << node->val;
 }
 
 int main(){
@@ -143,17 +154,18 @@ int main(){
     display(node);
     
     insertAtLast(node, 3);
-    // display(node);
+    display(node);
     
-    // insertAtLast(node, 5);
-    // display(node);
-    // insertAtLast(node, 5);
-    // display(node);
-    // insertAtLast(node, 6);
-    // display(node);
-    // insertAtLast(node, 6);
+    insertAtLast(node, 5);
+    display(node);
+    insertAtLast(node, 5);
+    display(node);
+    insertAtLast(node, 6);
+    display(node);
+    insertAtLast(node, 6);
     display(node);
     deleteDuplicateNode(node);
     display(node);
+    displayReverse(node);
     return 0;
 }

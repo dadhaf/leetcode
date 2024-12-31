@@ -21,10 +21,15 @@ public:
 void insertAtHead(SinglyNode* &node, int data);
 void insertAtLast(SinglyNode* &node, int data);
 void insertAtPosition(SinglyNode* &node, int data, int position);
+
 void updateAtPosition(SinglyNode* &node, int val, int pos);
+
 void deleteAttail(SinglyNode* &node);
 void deleteAtPosition(SinglyNode* &node, int pos);
-void display(SinglyNode* node);
 void deleteSecondNode(SinglyNode* &node);
+void deleteDuplicateNode(SinglyNode* &node);
+
+void display(SinglyNode* node);
+
 
 #endif

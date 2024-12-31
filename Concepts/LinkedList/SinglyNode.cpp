@@ -113,11 +113,10 @@ void display(SinglyNode* node){
     cout << "NULL" << endl;
 }
 
-void deleteDuplicateNode(SinglyNode* &node);
 void deleteDuplicateNode(SinglyNode* &node){
     SinglyNode* cur_node = node;
     SinglyNode* temp = NULL;
-    while (cur_node->next != NULL)
+    while (cur_node != NULL && cur_node->next != NULL)
     {
         while(cur_node->val == cur_node->next->val){
             temp = cur_node->next;
@@ -137,22 +136,22 @@ int main(){
     insertAtLast(node, 1);
     display(node);
     
-    insertAtLast(node, 2);
+    insertAtLast(node, 1);
     display(node);
     
     insertAtLast(node, 3);
     display(node);
     
-    insertAtLast(node, 4);
-    display(node);
+    insertAtLast(node, 3);
+    // display(node);
     
-    insertAtLast(node, 5);
-    display(node);
-    insertAtLast(node, 5);
-    display(node);
-    insertAtLast(node, 6);
-    display(node);
-    insertAtLast(node, 6);
+    // insertAtLast(node, 5);
+    // display(node);
+    // insertAtLast(node, 5);
+    // display(node);
+    // insertAtLast(node, 6);
+    // display(node);
+    // insertAtLast(node, 6);
     display(node);
     deleteDuplicateNode(node);
     display(node);

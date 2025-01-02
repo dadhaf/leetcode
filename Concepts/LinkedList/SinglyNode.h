@@ -30,6 +30,8 @@ void deleteSecondNode(SinglyNode* &node);
 void deleteDuplicateNode(SinglyNode* &node);
 
 void display(SinglyNode* node);
+void displayReverse(SinglyNode* &node);
 
+void reverseList(SinglyNode* prev_node, SinglyNode* &node);
 
 #endif

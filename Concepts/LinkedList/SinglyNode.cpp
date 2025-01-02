@@ -131,7 +131,28 @@ void deleteDuplicateNode(SinglyNode* &node){
     
 }
 
-void displayReverse(SinglyNode* &node);
+void reverseList(SinglyNode* &node){
+    if(node == NULL || node->next == NULL){
+        return;
+    }
+    SinglyNode* head = node;
+    SinglyNode* prev_node = NULL;
+    SinglyNode* next_node = node->next;
+    while (next_node != NULL)
+    {
+        head->next = prev_node;       
+        prev_node = head;
+        head = next_node;
+        next_node = next_node->next;
+        
+    }
+    head->next = prev_node;       
+    node = head;
+    
+    
+
+}
+
 void displayReverse(SinglyNode* &node){
     if(node==NULL){
         cout << "\nNULL";
@@ -166,6 +187,8 @@ int main(){
     display(node);
     deleteDuplicateNode(node);
     display(node);
-    displayReverse(node);
+    // displayReverse(node);
+    reverseList(node);
+    display(node);
     return 0;
 }

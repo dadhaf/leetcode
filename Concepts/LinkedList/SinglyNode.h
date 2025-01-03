@@ -32,6 +32,7 @@ void deleteDuplicateNode(SinglyNode* &node);
 void display(SinglyNode* node);
 void displayReverse(SinglyNode* &node);
 
-void reverseList(SinglyNode* prev_node, SinglyNode* &node);
+void reverseList(SinglyNode* &node);
+SinglyNode* reverseKElements(SinglyNode* &node, int k);
 
 #endif

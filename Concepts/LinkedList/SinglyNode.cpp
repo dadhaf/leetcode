@@ -149,7 +149,36 @@ void reverseList(SinglyNode* &node){
     head->next = prev_node;       
     node = head;
     
+
+}
+
+SinglyNode* reverseKElements(SinglyNode* &node, int k){
+
+    SinglyNode* head = node;
+    SinglyNode* prev_node = NULL;
+    if(node == NULL){
+        return NULL;
+    }
+    if(node->next == NULL){
+        return node;
+    }
+    // SinglyNode* next_node = node->next;
+    int count = 0;
+    while (head!=NULL && count < k)
+    {
+        SinglyNode* next_node = head->next;
+        head->next = prev_node;       
+        prev_node = head;
+        head = next_node;
+        count++;
+    }
+
     
+    SinglyNode* new_head = reverseKElements(head, k);
+    prev_node->next->next = new_head;
+    return prev_node;
+    
+
 
 }
 
@@ -168,7 +197,7 @@ int main(){
     insertAtLast(node, 1);
     display(node);
     
-    insertAtLast(node, 1);
+    insertAtLast(node, 2);
     display(node);
     
     insertAtLast(node, 3);
@@ -188,7 +217,7 @@ int main(){
     deleteDuplicateNode(node);
     display(node);
     // displayReverse(node);
-    reverseList(node);
-    display(node);
+    SinglyNode* new_head = reverseKElements(node,2);
+    display(new_head);
     return 0;
 }
